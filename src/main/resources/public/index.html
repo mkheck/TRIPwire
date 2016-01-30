@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="css/tripwire.css">
-    <script type="text/javascript" src="js/SegmentDisplay/segment-display.js"></script>
+    <script type="text/javascript" src="assets/smoothie.js"></script>
+    <script type="text/javascript" src="assets/SegmentDisplay/segment-display.js"></script>
     <script type='text/javascript'>
         var IPData;
         var webSocket;
@@ -27,6 +28,8 @@
             webSocket.onmessage = function (event) {
                 onMessage(event);
             };
+
+            createTimeline();
         }
         
         function onMessage(event) {
@@ -52,7 +55,7 @@
                 if (xhr.readyState === 4) {
                     var resp = xhr.responseText;
                     if (resp !== null) {
-                        IPData = resp;
+                        IPData = resp.concat("/data");
                         init();
                     }
                 }
@@ -63,7 +66,7 @@
 
         function createTimeline() {
             var chart = new SmoothieChart({
-                millisPerPixel: 3000, minValue: -10, timestampFormatter: SmoothieChart.timeFormatter,
+                millisPerPixel: 100, minValue: -10, timestampFormatter: SmoothieChart.timeFormatter,
                 grid: {
                     fillStyle: '#0f0000',
                     strokeStyle: 'rgba(119,119,119,0.1)',
@@ -96,7 +99,7 @@
                 lineWidth: 3
             });
 
-            chart.streamTo(document.getElementById("chart"), 3000);
+            chart.streamTo(document.getElementById("chart"), 1000);
         }
 
         function pad(value, length) {
@@ -105,22 +108,21 @@
     </script>
 </head>
 <body onload='getIP()' bgcolor="#cccccc">
-<div class="boxTitle" style="margin-top: 15px; margin-left: 15px; margin-right: 15px;">
-    <div style="text-align: center; padding: 10px;">TRIPwire Monitor Panel</div>
-</div>
-
-<div class="box" style="float: left; margin-top: 15px; margin-left: 22px; width: 800px; height: 480px;">
-    <div style='padding: 10px;'>
-        <canvas id="chart" width="320" height="410"></canvas>
+    <div class="boxTitle" style="margin-top: 15px; margin-left: 15px; margin-right: 15px;">
+        <div style="text-align: center; padding: 10px;">TRIPwire Monitor Panel</div>
     </div>
-    <div style="text-align: center; color: darkgrey">TRIPwire</div>
-</div>
 
-<div style="clear: both"></div>
-<div class="boxTitle"
-     style="position: relative; margin-top: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 15px;">
-    <div style="text-align: center; padding: 10px;">Mark Heckler 2016</div>
-</div>
+    <div class="box" style="float: left; margin-top: 15px; margin-left: 22px; width: 800px; height: 480px;">
+        <div style='padding: 10px;'>
+            <canvas id="chart" width="780" height="410"></canvas>
+        </div>
+        <div style="text-align: center; color: darkgrey">TRIPwire</div>
+    </div>
 
+    <div style="clear: both"></div>
+    <div class="boxTitle"
+         style="position: relative; margin-top: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 15px;">
+        <div style="text-align: center; padding: 10px;">Mark Heckler 2016</div>
+    </div>
 </body>
 </html>
