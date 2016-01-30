@@ -1,0 +1,273 @@
+body {
+    font-family: Verdana;
+    font-size: 1.2em;
+    line-height: 1.2em;
+    letter-spacing: 0;
+    text-align: left;
+    word-spacing: normal;
+    text-decoration: none;
+    color: #444;
+    background-color: darkslategrey;
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center bottom;
+}
+
+.boxTitle {
+    border: 6px solid darkgrey;
+    border-radius: 20px;
+    background-color: darkgrey;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: darkslategrey;
+}
+
+.box {
+    border: 4px solid darkgrey;
+    border-radius: 15px;
+}
+
+.box-invisible {
+    border: 4px solid transparent;
+    border-radius: 15px;
+}
+.intOnOffSwitch {
+    position: relative;
+    width: 83px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.intOnOffSwitch-checkbox {
+    display: none;
+}
+
+.intOnOffSwitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid darkgrey;
+    border-radius: 32px;
+}
+
+.intOnOffSwitch-inner {
+    width: 200%;
+    margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+}
+
+.intOnOffSwitch-inner:before, .intOnOffSwitch-inner:after {
+    float: left;
+    width: 50%;
+    height: 46px;
+    padding: 0;
+    line-height: 46px;
+    font-size: 32px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.intOnOffSwitch-inner:before {
+    content: "1";
+    padding-left: 9px;
+    background-color: darkslategrey;
+    color: darkgrey;
+}
+
+.intOnOffSwitch-inner:after {
+    content: "0";
+    padding-right: 9px;
+    background-color: darkslategrey;
+    color: darkgrey;
+    text-align: right;
+}
+
+.intOnOffSwitch-switch {
+    width: 36px;
+    margin: 5px;
+    background: darkgrey;
+    border: 2px solid darkgrey;
+    border-radius: 32px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 32px;
+    -moz-transition: all 0.3s ease-in 0s;
+    -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+}
+
+.intOnOffSwitch-checkbox:checked + .intOnOffSwitch-label .intOnOffSwitch-inner {
+    margin-left: 0;
+}
+
+.intOnOffSwitch-checkbox:checked + .intOnOffSwitch-label .intOnOffSwitch-switch {
+    right: 0px;
+}
+
+.outSwitch {
+    position: relative;
+    width: 122px;
+    height: 48px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    border: 2px solid darkgrey;
+    border-radius: 32px;
+    background-color: darkgrey;
+}
+
+.outSwitch-svg {
+    position: relative;
+    width: 26px;
+    height: 48px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    padding-left: 8px;
+    padding-top: 10px;
+}
+
+.extOnOffSwitch {
+    position: relative;
+    width: 100px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.extOnOffSwitch-checkbox {
+    display: none;
+}
+
+.extOnOffSwitch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid darkgrey;
+    border-radius: 9px;
+}
+
+.extOnOffSwitch-inner {
+    width: 200%;
+    margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s;
+    -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s;
+    transition: margin 0.3s ease-in 0s;
+}
+
+.extOnOffSwitch-inner:before, .extOnOffSwitch-inner:after {
+    float: left;
+    width: 50%;
+    height: 46px;
+    padding: 0;
+    line-height: 46px;
+    font-size: 32px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.extOnOffSwitch-inner:before {
+    content: "A";
+    padding-left: 14px;
+    background-color: darkslategrey;
+    color: darkgrey;
+}
+
+.extOnOffSwitch-inner:after {
+    content: "M";
+    padding-right: 14px;
+    background-color: darkslategrey;
+    color: darkgrey;
+    text-align: right;
+}
+
+.extOnOffSwitch-switch {
+    width: 36px;
+    margin: 5px;
+    background: darkgrey;
+    border: 2px solid darkgrey;
+    border-radius: 9px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 50px;
+    -moz-transition: all 0.3s ease-in 0s;
+    -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s;
+    transition: all 0.3s ease-in 0s;
+}
+
+.extOnOffSwitch-checkbox:checked + .extOnOffSwitch-label .extOnOffSwitch-inner {
+    margin-left: 0;
+}
+
+.extOnOffSwitch-checkbox:checked + .extOnOffSwitch-label .extOnOffSwitch-switch {
+    right: 0px;
+}
+
+.switch-label {
+    padding: 25px;
+    color: darkgrey;
+}
+
+.image-video {
+    width: 640px;
+    height: 480px;
+}
+
+.corner-frame {
+    width: 640px;
+    height: 480px;
+    position: relative;
+    border: 4px solid darkgrey;
+    border-radius: 15px;
+}
+
+.corner-top-left, .corner-top-right, .corner-bot-left, .corner-bot-right {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background: url(../images/5l520j.png) no-repeat;
+    color: darkgrey;
+    z-index: 1;
+}
+
+.corner-top-left {
+    top: 0;
+    left: 0;
+    background-position: 0 0;
+}
+
+.corner-top-right {
+    top: 0;
+    right: 0;
+    background-position: -10px 0;
+}
+
+.corner-bot-left {
+    bottom: 0px;
+    left: 0;
+    background-position: 0 -10px;
+}
+
+.corner-bot-right {
+    bottom: 0px;
+    right: 0;
+    background-position: -10px -10px;
+}

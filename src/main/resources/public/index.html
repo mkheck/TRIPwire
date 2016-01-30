@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ground Control</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/tripwire.css">
+    <script type="text/javascript" src="js/SegmentDisplay/segment-display.js"></script>
+    <script type='text/javascript'>
+        var IPData;
+        var webSocket;
+        var gTemp = new TimeSeries();
+        var gHum = new TimeSeries();
+        var gCpm = new TimeSeries();
+
+        function init() {
+            webSocket = new WebSocket(IPData);
+
+            webSocket.onerror = function (event) {
+                onError(event);
+            };
+
+            webSocket.onopen = function (event) {
+                onOpen(event);
+            };
+
+            webSocket.onmessage = function (event) {
+                onMessage(event);
+            };
+        }
+        
+        function onMessage(event) {
+            var json = JSON.parse(event.data);
+            var time = new Date().getTime();
+
+            gTemp.append(time, parseFloat(json.temp));
+            gHum.append(time, parseFloat(json.hum));
+            gCpm.append(time, parseInt(json.cpm));
+        }
+
+        function onOpen(event) {
+            alert('Connection established: ' + IPData);
+        }
+
+        function onError(event) {
+            alert('Error: ' + IPData + " " + event);
+        }
+
+        function getIP() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    var resp = xhr.responseText;
+                    if (resp !== null) {
+                        IPData = resp;
+                        init();
+                    }
+                }
+            };
+            xhr.open('GET', '/remote', true);
+            xhr.send(null);
+        }
+
+        function createTimeline() {
+            var chart = new SmoothieChart({
+                millisPerPixel: 3000, minValue: -10, timestampFormatter: SmoothieChart.timeFormatter,
+                grid: {
+                    fillStyle: '#0f0000',
+                    strokeStyle: 'rgba(119,119,119,0.1)',
+                    lineWidth: 1,
+                    millisPerLine: 3000,
+                    verticalSections: 5,
+                    sharpLines: true
+                },
+                labels: {fontSize: 16}
+            });
+
+            gTemp.append(new Date().getTime(), 0);
+            chart.addTimeSeries(gTemp, {
+                strokeStyle: 'rgba(255, 0, 0, 1)',
+                fillStyle: 'rgba(255, 0, 0, 0.1)',
+                lineWidth: 3
+            });
+
+            gHum.append(new Date().getTime(), 0);
+            chart.addTimeSeries(gHum, {
+                strokeStyle: 'rgba(0, 255, 0, 1)',
+                fillStyle: 'rgba(0, 255, 0, 0.2)',
+                lineWidth: 3
+            });
+
+            gCpm.append(new Date().getTime(), 0);
+            chart.addTimeSeries(gCpm, {
+                strokeStyle: 'rgba(0, 0, 255, 1)',
+                fillStyle: 'rgba(0, 0, 255, 0.1)',
+                lineWidth: 3
+            });
+
+            chart.streamTo(document.getElementById("chart"), 3000);
+        }
+
+        function pad(value, length) {
+            return (value.toString().length < length) ? pad("0" + value, length) : value.toString();
+        }
+    </script>
+</head>
+<body onload='getIP()' bgcolor="#cccccc">
+<div class="boxTitle" style="margin-top: 15px; margin-left: 15px; margin-right: 15px;">
+    <div style="text-align: center; padding: 10px;">TRIPwire Monitor Panel</div>
+</div>
+
+<div class="box" style="float: left; margin-top: 15px; margin-left: 22px; width: 800px; height: 480px;">
+    <div style='padding: 10px;'>
+        <canvas id="chart" width="320" height="410"></canvas>
+    </div>
+    <div style="text-align: center; color: darkgrey">TRIPwire</div>
+</div>
+
+<div style="clear: both"></div>
+<div class="boxTitle"
+     style="position: relative; margin-top: 15px; margin-bottom: 15px; margin-left: 15px; margin-right: 15px;">
+    <div style="text-align: center; padding: 10px;">Mark Heckler 2016</div>
+</div>
+
+</body>
+</html>
