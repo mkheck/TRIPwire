@@ -93,7 +93,7 @@ public class Reading {
 	public void setDistForward(long distForward) {
 		this.distForward = distForward;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Reading [id=" + id + ", hum=" + hum + ", temp=" + temp + ", radiation cpm=" + cpm +
